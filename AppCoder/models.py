@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 class Cursos(models.Model):
-
     nombre=models.CharField(max_length=40)
     camada = models.IntegerField()
 
@@ -22,3 +21,7 @@ class Entregas(models.Model):
     nombre= models.CharField(max_length=30)
     fechaDeEntrega = models.DateField()  
     entregado = models.BooleanField()
+
+class CursoFormulario(models.Model):
+    cursos = models.CharField(max_length=30)
+    camada = models.IntegerField()    

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import *
 
 # Create your views here.
 
@@ -20,3 +21,39 @@ def profes (request):
 
 def estudiantes (request):
     return render(request, "AppCoder/estudiantes.html")
+
+def cursoFormulario(request):
+    if request.method == 'POST':
+
+        miFormulario = CursoFormulario(request.POST)
+
+        print(miFormulario)
+
+        if miFormulario.is_valid:
+
+            informacion = miFormulario.cleaned_data
+
+            Cursos = cursos ( request.POST['cursos'], request.POST['camada'])
+
+            cursos.save()
+
+            return render(request, "AppCoder/inicio.html")
+    
+    else:
+
+        miFormulario= CursoFormulario()
+
+    return render(request, "AppCoder/cursoFormulario.html", {"miFormulario":miFormulario})
+
+
+
+def busquedaCamada(request):
+    return render(request, "AppCoder/busquedaCamada.html")
+
+
+
+def buscar(request):
+
+    respuesta = f"Estoy buscando la camada nro: {request.GET['camada']}"
+
+    #return HttpResponse(respuesta)
